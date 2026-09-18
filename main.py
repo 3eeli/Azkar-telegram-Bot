@@ -2,6 +2,7 @@ import telebot
 from telebot import types
 import threading
 import random
+
 import os
 from dotenv import load_dotenv
 from pymongo import MongoClient
@@ -66,6 +67,11 @@ def send_welcome(message):
 
     bot.reply_to(message, 'أهلًا , أنا بوت للأذكار , كيف أساعدك ؟',reply_markup=keyboard)
 
+@bot.message_handler(commands=[''])
+def menu(message):
+    keyboard = main_menu()
+
+    bot.reply_to(message,'كيـف أســاعـدك ؟',reply_markup=keyboard)
 
 @bot.callback_query_handler(func=lambda call : call.data == 'tzkeer+')
 def new_zkr(call):
